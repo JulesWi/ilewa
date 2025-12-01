@@ -6,38 +6,38 @@ import { Map, Filter, MessageSquare, BarChart3, Shield, Zap } from "lucide-react
 const features = [
   {
     icon: Map,
-    title: "Carte Interactive",
-    description: "Explorez les projets sur une carte mondiale interactive avec différents fonds de carte et outils de mesure.",
+    title: "Interactive Map",
+    description: "Explore projects on an interactive world map with different base layers and measurement tools.",
     color: "text-blue-600 dark:text-blue-400",
   },
   {
     icon: Filter,
-    title: "Filtrage Avancé",
-    description: "Filtrez les projets par catégorie, période, et localisation pour trouver exactement ce que vous cherchez.",
+    title: "Advanced Filtering",
+    description: "Filter projects by category, time period, and location to find exactly what you're looking for.",
     color: "text-indigo-600 dark:text-indigo-400",
   },
   {
     icon: MessageSquare,
     title: "Collaboration",
-    description: "Commentez, discutez et collaborez avec d'autres contributeurs sur les projets qui vous intéressent.",
+    description: "Comment, discuss, and collaborate with other contributors on projects that interest you.",
     color: "text-purple-600 dark:text-purple-400",
   },
   {
     icon: BarChart3,
-    title: "Analyses & Statistiques",
-    description: "Visualisez les tendances et statistiques des projets avec des graphiques interactifs détaillés.",
+    title: "Analytics & Statistics",
+    description: "Visualize project trends and statistics with detailed interactive charts.",
     color: "text-pink-600 dark:text-pink-400",
   },
   {
     icon: Shield,
-    title: "Modération",
-    description: "Tous les projets sont validés par notre équipe avant publication pour garantir la qualité du contenu.",
+    title: "Moderation",
+    description: "All projects are validated by our team before publication to ensure content quality.",
     color: "text-green-600 dark:text-green-400",
   },
   {
     icon: Zap,
-    title: "Temps Réel",
-    description: "Recevez des notifications instantanées sur les nouveaux projets et les mises à jour importantes.",
+    title: "Real-Time",
+    description: "Receive instant notifications about new projects and important updates.",
     color: "text-orange-600 dark:text-orange-400",
   },
 ]
@@ -48,10 +48,10 @@ export default function FeaturesSection() {
       <div className="container mx-auto px-4">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            Fonctionnalités Puissantes
+            Powerful Features
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Tout ce dont vous avez besoin pour découvrir, partager et gérer des projets innovants
+            Everything you need to discover, share, and manage innovative projects
           </p>
         </div>
 

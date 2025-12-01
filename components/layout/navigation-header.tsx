@@ -37,7 +37,7 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <Map className="h-4 w-4" />
-                <span>Carte</span>
+                <span>Map</span>
               </ModernButton>
             </Link>
             
@@ -47,7 +47,7 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <Plus className="h-4 w-4" />
-                <span>Nouveau Projet</span>
+                <span>New Project</span>
               </ModernButton>
             </Link>
           </nav>
@@ -67,13 +67,13 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <LogOut className="h-4 w-4" />
-                <span>Déconnexion</span>
+                <span>Sign Out</span>
               </ModernButton>
             </div>
           ) : (
             <Link href="/auth">
               <ModernButton variant="default">
-                Connexion
+                Sign In
               </ModernButton>
             </Link>
           )}

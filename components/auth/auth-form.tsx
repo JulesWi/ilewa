@@ -96,8 +96,8 @@ export default function AuthForm() {
       <Tabs defaultValue="signin">
         <CardHeader className="bg-slate-50 border-b border-slate-200">
           <TabsList className="grid w-full grid-cols-2 bg-white">
-            <TabsTrigger value="signin" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white">Connexion</TabsTrigger>
-            <TabsTrigger value="signup" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white">Inscription</TabsTrigger>
+            <TabsTrigger value="signin" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white">Sign In</TabsTrigger>
+            <TabsTrigger value="signup" className="data-[state=active]:bg-slate-800 data-[state=active]:text-white">Sign Up</TabsTrigger>
           </TabsList>
         </CardHeader>
         <CardContent className="pt-6">
@@ -110,7 +110,7 @@ export default function AuthForm() {
                 <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Mot de passe</Label>
+                <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   type="password"
@@ -120,7 +120,7 @@ export default function AuthForm() {
                 />
               </div>
               <ModernButton type="submit" variant="default" className="w-full" disabled={loading}>
-                {loading ? "Connexion en cours..." : "Se connecter"}
+                {loading ? "Signing in..." : "Sign In"}
               </ModernButton>
             </form>
           </TabsContent>
@@ -128,7 +128,7 @@ export default function AuthForm() {
           <TabsContent value="signup">
             <form onSubmit={handleSignUp} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="fullName">Nom complet</Label>
+                <Label htmlFor="fullName">Full Name</Label>
                 <Input
                   id="fullName"
                   type="text"
@@ -148,7 +148,7 @@ export default function AuthForm() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password-signup">Mot de passe</Label>
+                <Label htmlFor="password-signup">Password</Label>
                 <Input
                   id="password-signup"
                   type="password"
@@ -158,7 +158,7 @@ export default function AuthForm() {
                 />
               </div>
               <ModernButton type="submit" variant="default" className="w-full" disabled={loading}>
-                {loading ? "Inscription en cours..." : "S'inscrire"}
+                {loading ? "Signing up..." : "Sign Up"}
               </ModernButton>
             </form>
           </TabsContent>
