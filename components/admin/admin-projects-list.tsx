@@ -59,9 +59,11 @@ export default function AdminProjectsList() {
 
   const handleApproveProject = async (id: string) => {
     try {
+      const updateData: any = { status: "approved", updated_at: new Date().toISOString() }
+      // @ts-ignore - Supabase typing issue
       const { error } = await supabase
         .from("projects")
-        .update({ status: "approved", updated_at: new Date().toISOString() })
+        .update(updateData)
         .eq("id", id)
 
       if (error) throw error
@@ -86,9 +88,11 @@ export default function AdminProjectsList() {
 
   const handleRejectProject = async (id: string) => {
     try {
+      const updateData: any = { status: "rejected", updated_at: new Date().toISOString() }
+      // @ts-ignore - Supabase typing issue
       const { error } = await supabase
         .from("projects")
-        .update({ status: "rejected", updated_at: new Date().toISOString() })
+        .update(updateData)
         .eq("id", id)
 
       if (error) throw error
