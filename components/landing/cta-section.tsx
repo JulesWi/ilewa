@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default function CTASection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-600 to-indigo-700 dark:from-blue-800 dark:to-indigo-900">
+    <section className="py-20 bg-gradient-to-br from-slate-700 to-slate-800 dark:from-slate-800 dark:to-slate-900">
       <div className="container mx-auto px-4">
         <Card className="max-w-4xl mx-auto bg-white/10 backdrop-blur-lg border-white/20 text-white">
           <div className="p-12 text-center space-y-6">

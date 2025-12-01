@@ -53,6 +53,22 @@ export const categoryMarkers: Record<string, CategoryMarker> = {
     name: 'Épidémie',
     icon: 'Activity'
   },
+  tourisme: {
+    symbol: '✈️',
+    color: '#0891b2',      // Cyan
+    bgColor: '#cffafe',    // Cyan clair
+    borderColor: '#0e7490',
+    name: 'Tourisme',
+    icon: 'Plane'
+  },
+  politique: {
+    symbol: '⚖️',
+    color: '#7c3aed',      // Violet foncé
+    bgColor: '#ede9fe',    // Violet très clair
+    borderColor: '#6d28d9',
+    name: 'Politique',
+    icon: 'Scale'
+  },
   default: {
     symbol: '📍',
     color: '#64748b',      // Gris ardoise

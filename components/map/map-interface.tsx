@@ -6,7 +6,6 @@ import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { supabase } from "@/lib/supabaseClient"
 import { getMockProjects, getMockProjectsByCategory } from "@/lib/mock-projects"
-import FloatingAddButton from "@/components/map/floating-add-button"
 import MapWidgets from "@/components/map/map-widgets"
 import ProjectPopup from "@/components/map/project-popup"
 import { createCustomMarkerHTML, getCategoryInfo } from "@/lib/category-markers"
@@ -310,8 +309,26 @@ export default function MapInterface() {
         selectedProject={selectedProject}
       />
 
-      {/* Bouton Flottant Ajouter Projet */}
-      <FloatingAddButton />
+      {/* Statistiques de la carte */}
+      <div className="fixed bottom-6 right-6 bg-white rounded-lg shadow-lg border border-slate-200 p-4 max-w-xs" style={{ zIndex: 1000 }}>
+        <h3 className="text-sm font-semibold text-slate-800 mb-3">Statistiques</h3>
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-slate-600">Projets visibles</span>
+            <span className="text-sm font-bold text-blue-600">{filteredProjects.length}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-slate-600">Total projets</span>
+            <span className="text-sm font-bold text-slate-800">{allProjects.length}</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-xs text-slate-600">Catégorie active</span>
+            <span className="text-xs font-medium text-slate-700">
+              {selectedCategory === "all" ? "Toutes" : selectedCategory}
+            </span>
+          </div>
+        </div>
+      </div>
 
       {/* Popup Raffiné pour les Projets */}
       {showProjectPopup && selectedProject && (

@@ -170,11 +170,13 @@ export default function ProjectForm() {
                 <SelectValue placeholder="Sélectionner une catégorie" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="economie">Économie</SelectItem>
-                <SelectItem value="sante">Santé</SelectItem>
-                <SelectItem value="environnement">Environnement</SelectItem>
-                <SelectItem value="education">Éducation</SelectItem>
-                <SelectItem value="epidemie">Épidémie</SelectItem>
+                <SelectItem value="economie">💰 Économie</SelectItem>
+                <SelectItem value="sante">🏥 Santé</SelectItem>
+                <SelectItem value="environnement">🌱 Environnement</SelectItem>
+                <SelectItem value="education">📚 Éducation</SelectItem>
+                <SelectItem value="epidemie">🦠 Épidémie</SelectItem>
+                <SelectItem value="tourisme">✈️ Tourisme</SelectItem>
+                <SelectItem value="politique">⚖️ Politique</SelectItem>
               </SelectContent>
             </Select>
             {errors.category && (
