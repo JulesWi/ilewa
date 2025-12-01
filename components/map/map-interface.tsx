@@ -23,73 +23,6 @@ const createMarkerIcon = (category: string) => {
   })
 }
 
-// Sample project data - icons will be generated dynamically based on category
-const projects = [
-  {
-    id: 1,
-    position: [35.6895, 139.6917],
-    category: "education",
-    title: "School proximity",
-    author: "Harold Cooper",
-  },
-  {
-    id: 2,
-    position: [40.7128, -74.006],
-    category: "economie",
-    title: "Smart City Initiative",
-    author: "Harold Cooper",
-  },
-  {
-    id: 3,
-    position: [51.5074, -0.1278],
-    category: "environnement",
-    title: "Urban Green Spaces",
-    author: "John Smith",
-  },
-  {
-    id: 4,
-    position: [48.8566, 2.3522],
-    category: "sante",
-    title: "Water Quality Monitoring",
-    author: "Emma Johnson",
-  },
-  {
-    id: 5,
-    position: [-33.8688, 151.2093],
-    category: "education",
-    title: "Digital Classroom",
-    author: "Maria Rodriguez",
-  },
-  {
-    id: 6,
-    position: [19.4326, -99.1332],
-    category: "environnement",
-    title: "Rainwater Harvesting",
-    author: "Carlos Mendez",
-  },
-  {
-    id: 7,
-    position: [55.7558, 37.6173],
-    category: "economie",
-    title: "IoT Traffic Management",
-    author: "Alexei Petrov",
-  },
-  {
-    id: 8,
-    position: [30.0444, 31.2357],
-    category: "epidemie",
-    title: "Nile Conservation",
-    author: "Ahmed Hassan",
-  },
-  {
-    id: 9,
-    position: [41.9028, 12.4964],
-    category: "environnement",
-    title: "Urban Biodiversity",
-    author: "Sofia Garcia",
-  },
-]
-
 // Basemap options
 const basemaps = {
   OSM: {
@@ -180,7 +113,7 @@ export default function MapInterface() {
   const [activeTool, setActiveTool] = useState<string | null>(null)
   const [selectedCategory, setSelectedCategory] = useState<string | null>("all")
   const [filteredProjects, setFilteredProjects] = useState<any[]>([])
-  const [allProjects, setAllProjects] = useState<any[]>(projects) // Store all projects
+  const [allProjects, setAllProjects] = useState<any[]>([]) // Store all projects
 
   // Fix Leaflet icon issues
   useEffect(() => {
