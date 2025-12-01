@@ -101,7 +101,16 @@ function MeasurementController({ activeTool, setActiveTool }) {
   return null
 }
 
-export default function MapInterface() {
+interface MapInterfaceProps {
+  initialPosition?: {
+    lat: number
+    lng: number
+    zoom: number
+  }
+  highlightProjectId?: string | null
+}
+
+export default function MapInterface({ initialPosition, highlightProjectId }: MapInterfaceProps = {}) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
   const [showComments, setShowComments] = useState(false)
   const [selectedProject, setSelectedProject] = useState<any>(null)
@@ -113,6 +122,10 @@ export default function MapInterface() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>("all")
   const [filteredProjects, setFilteredProjects] = useState<any[]>([])
   const [allProjects, setAllProjects] = useState<any[]>([]) // Store all projects
+  const [mapCenter, setMapCenter] = useState<[number, number]>(
+    initialPosition ? [initialPosition.lat, initialPosition.lng] : [6.3703, 2.3912]
+  )
+  const [mapZoom, setMapZoom] = useState(initialPosition?.zoom || 6)
 
   // Fix Leaflet icon issues
   useEffect(() => {
@@ -203,6 +216,17 @@ export default function MapInterface() {
     setFilteredProjects(newFilteredProjects)
   }, [selectedCategory, allProjects])
 
+  // Highlight project if ID is provided
+  useEffect(() => {
+    if (highlightProjectId && allProjects.length > 0) {
+      const project = allProjects.find(p => p.id.toString() === highlightProjectId)
+      if (project) {
+        setSelectedProject(project)
+        setShowProjectPopup(true)
+      }
+    }
+  }, [highlightProjectId, allProjects])
+
   const handleToolSelect = (tool: string) => {
     setActiveTool(tool === activeTool ? null : tool)
   }
@@ -274,7 +298,7 @@ export default function MapInterface() {
         
         {/* Conteneur de la carte */}
         <div className="flex-1 relative" style={{ zIndex: 1 }}>
-          <MapContainer center={[20, 0]} zoom={2} className="h-full w-full rounded-b-lg" zoomControl={false}>
+          <MapContainer center={mapCenter} zoom={mapZoom} className="h-full w-full rounded-b-lg" zoomControl={false}>
         <TileLayer url={basemaps.OSM.url} attribution={basemaps.OSM.attribution} />
         <ZoomControl position="bottomright" />
 

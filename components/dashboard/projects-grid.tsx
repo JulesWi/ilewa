@@ -159,7 +159,7 @@ export default function ProjectsGrid() {
                       </Button>
                     </Link>
                   )}
-                  <Link href={`/map?project=${project.id}`} className="flex-1">
+                  <Link href={`/map?lat=${project.latitude}&lng=${project.longitude}&zoom=15&project=${project.id}`} className="flex-1">
                     <Button variant="outline" size="sm" className="w-full">
                       <Eye className="h-3 w-3 mr-1" />
                       Sur la carte

@@ -139,9 +139,17 @@ export default function AnalyticsDashboard() {
   return (
     <div className="container mx-auto p-6 space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold">Tableau de bord</h1>
-        <p className="text-gray-600 dark:text-gray-400">Vue d'ensemble de vos projets et statistiques</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Tableau de bord</h1>
+          <p className="text-gray-600 dark:text-gray-400">Vue d'ensemble de vos projets et statistiques</p>
+        </div>
+        <Link href="/project/new">
+          <Button size="lg" className="gap-2">
+            <Plus className="h-5 w-5" />
+            Nouveau projet
+          </Button>
+        </Link>
       </div>
 
       {/* Stats Cards */}

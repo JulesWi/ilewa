@@ -1,6 +1,7 @@
 "use client"
 
 import { Suspense, lazy, useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { ErrorBoundary } from '@/components/error-boundary'
 import { MapLoading } from '@/components/loading-fallback'
 
@@ -9,6 +10,7 @@ const MapInterface = lazy(() => import('./map-interface'))
 
 export default function MapWrapper() {
   const [isClient, setIsClient] = useState(false)
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     setIsClient(true)
@@ -17,6 +19,18 @@ export default function MapWrapper() {
   if (!isClient) {
     return <MapLoading />
   }
+
+  // Récupérer les paramètres de l'URL
+  const lat = searchParams.get('lat')
+  const lng = searchParams.get('lng')
+  const zoom = searchParams.get('zoom')
+  const projectId = searchParams.get('project')
+
+  const initialPosition = lat && lng ? {
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
+    zoom: zoom ? parseInt(zoom) : 15
+  } : undefined
 
   return (
     <ErrorBoundary
@@ -38,7 +52,7 @@ export default function MapWrapper() {
       }
     >
       <Suspense fallback={<MapLoading />}>
-        <MapInterface />
+        <MapInterface initialPosition={initialPosition} highlightProjectId={projectId} />
       </Suspense>
     </ErrorBoundary>
   )
