@@ -6,7 +6,13 @@ import { ErrorBoundary } from '@/components/error-boundary'
 import { MapLoading } from '@/components/loading-fallback'
 
 // Lazy load du composant carte pour éviter les erreurs SSR
-const MapInterface = lazy(() => import('./map-interface'))
+const MapInterface = lazy(() => import('./map-interface').then(module => {
+  console.log('MapInterface chargé avec succès')
+  return module
+}).catch(error => {
+  console.error('Erreur lors du chargement de MapInterface:', error)
+  throw error
+}))
 
 export default function MapWrapper() {
   const [isClient, setIsClient] = useState(false)

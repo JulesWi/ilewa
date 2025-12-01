@@ -129,13 +129,19 @@ export default function MapInterface({ initialPosition, highlightProjectId }: Ma
 
   // Fix Leaflet icon issues
   useEffect(() => {
-    // Fix Leaflet default icon
-    delete L.Icon.Default.prototype._getIconUrl
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl: "/marker-icon-2x.png",
-      iconUrl: "/marker-icon.png",
-      shadowUrl: "/marker-shadow.png",
-    })
+    console.log('Initialisation de Leaflet...')
+    try {
+      // Fix Leaflet default icon
+      delete L.Icon.Default.prototype._getIconUrl
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: "/marker-icon-2x.png",
+        iconUrl: "/marker-icon.png",
+        shadowUrl: "/marker-shadow.png",
+      })
+      console.log('Leaflet initialisé avec succès')
+    } catch (error) {
+      console.error('Erreur lors de l\'initialisation de Leaflet:', error)
+    }
   }, [])
 
   // Function to get the correct icon based on category

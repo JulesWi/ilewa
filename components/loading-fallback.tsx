@@ -49,11 +49,19 @@ export function PageLoading() {
 
 export function MapLoading() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-50">
-      <Card className="shadow-lg">
-        <CardContent className="flex flex-col items-center justify-center p-6 space-y-4">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-          <p className="text-sm text-muted-foreground">Chargement de la carte...</p>
+    <div className="h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <Card className="shadow-xl border-2">
+        <CardContent className="flex flex-col items-center justify-center p-8 space-y-4">
+          <div className="relative">
+            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            <div className="absolute inset-0 h-12 w-12 animate-ping text-primary/20">
+              <Loader2 className="h-12 w-12" />
+            </div>
+          </div>
+          <div className="text-center space-y-2">
+            <p className="text-base font-medium">Chargement de la carte interactive</p>
+            <p className="text-xs text-muted-foreground">Initialisation de Leaflet et des marqueurs...</p>
+          </div>
         </CardContent>
       </Card>
     </div>
