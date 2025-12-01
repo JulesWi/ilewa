@@ -78,7 +78,6 @@ export default function ProjectPopup({ project, onClose }: ProjectPopupProps) {
   const [newComment, setNewComment] = useState("")
   const [replyTo, setReplyTo] = useState<number | null>(null)
   const [replyContent, setReplyContent] = useState("")
-  const [showIframe, setShowIframe] = useState(false)
 
   const handleAddComment = () => {
     if (!newComment.trim()) return
@@ -195,10 +194,12 @@ export default function ProjectPopup({ project, onClose }: ProjectPopupProps) {
                 <p>{project.description}</p>
 
                 <div className="flex items-center justify-between">
-                  <Button variant="outline" className="gap-2" onClick={() => setShowIframe(!showIframe)}>
-                    <ExternalLink className="h-4 w-4" />
-                    {showIframe ? "Masquer le dépôt" : "Voir le dépôt"}
-                  </Button>
+                  <a href={project.repository_url} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="gap-2">
+                      <ExternalLink className="h-4 w-4" />
+                      Voir le dépôt
+                    </Button>
+                  </a>
 
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -252,11 +253,6 @@ export default function ProjectPopup({ project, onClose }: ProjectPopupProps) {
                   </DropdownMenu>
                 </div>
 
-                {showIframe && (
-                  <div className="mt-4 h-96 w-full overflow-hidden rounded border">
-                    <iframe src={project.repository_url} className="h-full w-full" title={`Dépôt de ${project.name}`} />
-                  </div>
-                )}
 
                 <div className="mt-4">
                   <Dialog>
