@@ -9,27 +9,21 @@ import { getMockProjects, getMockProjectsByCategory } from "@/lib/mock-projects"
 import FloatingAddButton from "@/components/map/floating-add-button"
 import MapWidgets from "@/components/map/map-widgets"
 import ProjectPopup from "@/components/map/project-popup"
+import { createCustomMarkerHTML, getCategoryInfo } from "@/lib/category-markers"
 
-// Custom marker icons
-const redMarkerIcon = new L.Icon({
-  iconUrl: "/red-marker.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: "/marker-shadow.png",
-  shadowSize: [41, 41],
-})
+// Function to create custom marker icon from category
+const createMarkerIcon = (category: string) => {
+  const html = createCustomMarkerHTML(category)
+  return L.divIcon({
+    html,
+    className: 'custom-marker-icon',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -40],
+  })
+}
 
-const blueMarkerIcon = new L.Icon({
-  iconUrl: "/blue-marker.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: "/marker-shadow.png",
-  shadowSize: [41, 41],
-})
-
-// Sample project data
+// Sample project data - icons will be generated dynamically based on category
 const projects = [
   {
     id: 1,
@@ -37,71 +31,62 @@ const projects = [
     category: "education",
     title: "School proximity",
     author: "Harold Cooper",
-    icon: redMarkerIcon,
   },
   {
     id: 2,
     position: [40.7128, -74.006],
-    category: "technology",
+    category: "economie",
     title: "Smart City Initiative",
     author: "Harold Cooper",
-    icon: redMarkerIcon,
   },
   {
     id: 3,
-    position: [48.8566, 2.3522],
-    category: "environment",
+    position: [51.5074, -0.1278],
+    category: "environnement",
     title: "Urban Green Spaces",
     author: "John Smith",
-    icon: redMarkerIcon,
   },
   {
     id: 4,
-    position: [-33.8688, 151.2093],
-    category: "water",
+    position: [48.8566, 2.3522],
+    category: "sante",
     title: "Water Quality Monitoring",
     author: "Emma Johnson",
-    icon: blueMarkerIcon,
   },
   {
     id: 5,
-    position: [19.4326, -99.1332],
+    position: [-33.8688, 151.2093],
     category: "education",
     title: "Digital Classroom",
     author: "Maria Rodriguez",
-    icon: redMarkerIcon,
   },
   {
     id: 6,
-    position: [-23.5505, -46.6333],
-    category: "water",
+    position: [19.4326, -99.1332],
+    category: "environnement",
     title: "Rainwater Harvesting",
     author: "Carlos Mendez",
-    icon: blueMarkerIcon,
   },
   {
     id: 7,
     position: [55.7558, 37.6173],
-    category: "technology",
+    category: "economie",
     title: "IoT Traffic Management",
     author: "Alexei Petrov",
-    icon: redMarkerIcon,
   },
   {
     id: 8,
     position: [30.0444, 31.2357],
-    category: "water",
+    category: "epidemie",
     title: "Nile Conservation",
     author: "Ahmed Hassan",
-    icon: blueMarkerIcon,
   },
   {
     id: 9,
-    position: [-34.6037, -58.3816],
-    category: "environment",
+    position: [41.9028, 12.4964],
+    category: "environnement",
     title: "Urban Biodiversity",
     author: "Sofia Garcia",
-    icon: blueMarkerIcon,
   },
 ]
 
@@ -210,18 +195,7 @@ export default function MapInterface() {
 
   // Function to get the correct icon based on category
   const getCategoryIcon = useCallback((category: string) => {
-    switch (category) {
-      case "education":
-        return redMarkerIcon
-      case "technology":
-        return redMarkerIcon
-      case "environment":
-        return redMarkerIcon
-      case "water":
-        return blueMarkerIcon
-      default:
-        return redMarkerIcon
-    }
+    return createMarkerIcon(category)
   }, [])
 
   // Fonction pour charger les projets depuis Supabase avec fallback sur mock data

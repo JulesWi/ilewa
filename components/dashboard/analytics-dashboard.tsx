@@ -97,25 +97,9 @@ export default function AnalyticsDashboard() {
   return (
     <div className="container mx-auto p-6 space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Tableau de bord</h1>
-          <p className="text-gray-600 dark:text-gray-400">Vue d'ensemble de vos projets et statistiques</p>
-        </div>
-        <div className="flex gap-3">
-          <Link href="/map">
-            <Button variant="outline">
-              <Eye className="mr-2 h-4 w-4" />
-              Voir la carte
-            </Button>
-          </Link>
-          <Link href="/submit-project">
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <Plus className="mr-2 h-4 w-4" />
-              Nouveau projet
-            </Button>
-          </Link>
-        </div>
+      <div>
+        <h1 className="text-3xl font-bold">Tableau de bord</h1>
+        <p className="text-gray-600 dark:text-gray-400">Vue d'ensemble de vos projets et statistiques</p>
       </div>
 
       {/* Stats Cards */}
@@ -271,33 +255,6 @@ export default function AnalyticsDashboard() {
         </TabsContent>
       </Tabs>
 
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Actions Rapides</CardTitle>
-          <CardDescription>Accédez rapidement aux fonctionnalités principales</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-3">
-            <Link href="/submit-project">
-              <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
-                <Plus className="h-6 w-6" />
-                <span>Soumettre un projet</span>
-              </Button>
-            </Link>
-            <Link href="/map">
-              <Button variant="outline" className="w-full h-20 flex flex-col gap-2">
-                <MapPin className="h-6 w-6" />
-                <span>Explorer la carte</span>
-              </Button>
-            </Link>
-            <Button variant="outline" className="w-full h-20 flex flex-col gap-2" onClick={() => window.print()}>
-              <Download className="h-6 w-6" />
-              <span>Exporter les données</span>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 }

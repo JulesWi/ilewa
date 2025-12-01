@@ -140,8 +140,8 @@ export default function ProjectForm() {
         description: "Votre projet a été soumis avec succès et est en attente de validation",
       })
 
-      // Rediriger vers la page d'accueil
-      router.push("/")
+      // Rediriger vers le dashboard
+      router.push("/dashboard")
     } catch (error: any) {
       toast({
         title: "Erreur",
@@ -306,16 +306,26 @@ export default function ProjectForm() {
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Soumission en cours...
-              </>
-            ) : (
-              "Soumettre le projet"
-            )}
-          </Button>
+          <div className="flex gap-3">
+            <Button type="submit" className="flex-1" disabled={loading}>
+              {loading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Soumission en cours...
+                </>
+              ) : (
+                "Soumettre le projet"
+              )}
+            </Button>
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={() => router.push("/dashboard")}
+              disabled={loading}
+            >
+              Annuler
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>
