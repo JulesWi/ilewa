@@ -48,7 +48,7 @@ export default function ProjectsGrid() {
         setProjects(data as any)
       }
     } catch (error) {
-      console.error('Erreur lors du chargement des projets:', error)
+      console.error('Erreur lors du chargement des projets:', error instanceof Error ? error.message : 'Erreur inconnue', error)
       const mockData = getMockProjects()
       setProjects(mockData as any)
     } finally {

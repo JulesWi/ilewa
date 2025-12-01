@@ -150,6 +150,9 @@ export default function MapInterface({ initialPosition, highlightProjectId }: Ma
 
       // Si erreur ou pas de données, utiliser les mock projects
       if (error || !data || data.length === 0) {
+        if (error) {
+          console.warn("Erreur Supabase:", error.message, error)
+        }
         console.log("Utilisation des données de démonstration")
         const mockData = getMockProjects()
         const projectsData = mockData.map((project) => ({
@@ -182,7 +185,7 @@ export default function MapInterface({ initialPosition, highlightProjectId }: Ma
       setAllProjects(projectsData)
       setFilteredProjects(projectsData)
     } catch (error) {
-      console.error("Erreur lors du chargement des projets:", error)
+      console.error("Erreur lors du chargement des projets:", error instanceof Error ? error.message : 'Erreur inconnue', error)
       // En cas d'erreur, utiliser les mock projects
       const mockData = getMockProjects()
       const projectsData = mockData.map((project) => ({
