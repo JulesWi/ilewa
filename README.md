@@ -1,6 +1,7 @@
 # 🌍 ILEWA - Plateforme Cartographique Interactive
 
 > Application web de visualisation et gestion de projets géolocalisés en Afrique de l'Ouest
+> Déploiement continu avec Vercel
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
