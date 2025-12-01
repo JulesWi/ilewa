@@ -16,6 +16,7 @@ import {
 import { supabase } from "@/lib/supabaseClient"
 import Link from "next/link"
 import MapPreview from "./map-preview"
+import ProjectsGrid from "./projects-grid"
 import { mockStats } from "@/lib/mock-projects"
 
 const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316']
@@ -46,11 +47,15 @@ export default function AnalyticsDashboard() {
     try {
       console.log('fetchAnalytics - Début du chargement')
       
-      // Utiliser directement les mock stats pour éviter les problèmes Supabase
-      console.log('Utilisation des statistiques de démonstration')
-      setStats(mockStats)
+      // Charger les vraies données depuis Supabase
+      const { data: projects, error } = await supabase
+        .from('projects')
+        .select('*')
+      
+      if (error || !projects || projects.length === 0) {
+        console.log('Utilisation des statistiques de démonstration')
+        setStats(mockStats)
         
-        // Données par catégorie (mock)
         const catData = [
           { name: 'Économie', value: mockStats.categories.economie },
           { name: 'Santé', value: mockStats.categories.sante },
@@ -59,24 +64,61 @@ export default function AnalyticsDashboard() {
           { name: 'Épidémie', value: mockStats.categories.epidemie },
         ]
         setCategoryData(catData)
-
-        // Données de statut pour le pie chart
         setStatusData([
           { name: 'Approuvés', value: mockStats.approvedProjects },
           { name: 'En attente', value: mockStats.pendingProjects },
           { name: 'Rejetés', value: mockStats.rejectedProjects },
         ])
-
-        // Timeline des 6 derniers mois (mock)
-        const timeData = [
-          { month: 'Nov', projets: 18 },
-          { month: 'Déc', projets: 20 },
-          { month: 'Jan', projets: 22 },
-          { month: 'Fév', projets: 21 },
-          { month: 'Mar', projets: 23 },
-          { month: 'Avr', projets: 24 },
+      } else {
+        // Calculer les vraies statistiques
+        const totalProjects = projects.length
+        const approvedProjects = projects.filter(p => p.status === 'approved').length
+        const pendingProjects = projects.filter(p => p.status === 'pending').length
+        const rejectedProjects = projects.filter(p => p.status === 'rejected').length
+        
+        setStats({
+          totalProjects,
+          approvedProjects,
+          pendingProjects,
+          rejectedProjects,
+          totalUsers: 0,
+          myProjects: 0,
+        })
+        
+        // Compter par catégorie
+        const categories = projects.reduce((acc: any, p: any) => {
+          acc[p.category] = (acc[p.category] || 0) + 1
+          return acc
+        }, {})
+        
+        const catData = [
+          { name: 'Économie', value: categories.economie || 0 },
+          { name: 'Santé', value: categories.sante || 0 },
+          { name: 'Environnement', value: categories.environnement || 0 },
+          { name: 'Éducation', value: categories.education || 0 },
+          { name: 'Épidémie', value: categories.epidemie || 0 },
+          { name: 'Tourisme', value: categories.tourisme || 0 },
+          { name: 'Politique', value: categories.politique || 0 },
         ]
-        setTimelineData(timeData)
+        setCategoryData(catData)
+        
+        setStatusData([
+          { name: 'Approuvés', value: approvedProjects },
+          { name: 'En attente', value: pendingProjects },
+          { name: 'Rejetés', value: rejectedProjects },
+        ])
+      }
+      
+      // Timeline des 6 derniers mois (mock pour l'instant)
+      const timeData = [
+        { month: 'Nov', projets: 18 },
+        { month: 'Déc', projets: 20 },
+        { month: 'Jan', projets: 22 },
+        { month: 'Fév', projets: 21 },
+        { month: 'Mar', projets: 23 },
+        { month: 'Avr', projets: 24 },
+      ]
+      setTimelineData(timeData)
       
       console.log('fetchAnalytics - Données chargées avec succès')
       setLoading(false)
@@ -153,6 +195,7 @@ export default function AnalyticsDashboard() {
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Vue d'ensemble</TabsTrigger>
+          <TabsTrigger value="projects">Projets</TabsTrigger>
           <TabsTrigger value="categories">Par Catégorie</TabsTrigger>
           <TabsTrigger value="timeline">Évolution</TabsTrigger>
         </TabsList>
@@ -210,6 +253,18 @@ export default function AnalyticsDashboard() {
             {/* Map Preview */}
             <MapPreview projectCount={stats.approvedProjects} />
           </div>
+        </TabsContent>
+
+        <TabsContent value="projects" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Tous les Projets</CardTitle>
+              <CardDescription>Liste complète des projets soumis (y compris en attente)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ProjectsGrid />
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="categories" className="space-y-4">

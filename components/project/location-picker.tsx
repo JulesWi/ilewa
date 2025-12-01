@@ -140,7 +140,8 @@ export default function LocationPicker({
     
     // Géocodage inverse pour obtenir le nom du lieu
     const locationName = await reverseGeocode(lat, lng)
-    setSearchQuery(locationName)
+    // Ne pas mettre à jour searchQuery pour garder le nom du lieu
+    // setSearchQuery(locationName)
     
     onLocationSelect({
       name: locationName,
