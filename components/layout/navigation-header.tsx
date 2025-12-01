@@ -1,14 +1,17 @@
 "use client"
 
 import { ModernButton } from "@/components/ui/modern-button"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { BarChart3, Map, Plus, User, LogOut } from "lucide-react"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { useAuth } from "@/hooks/useAuth"
+import { useTranslation } from "@/hooks/useTranslation"
 
 export default function NavigationHeader() {
   const pathname = usePathname()
   const { user, isAuthenticated, signOut } = useAuth()
+  const { t } = useTranslation()
 
   const isActive = (path: string) => pathname === path
 
@@ -27,7 +30,7 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <BarChart3 className="h-4 w-4" />
-                <span>Dashboard</span>
+                <span>{t.nav.dashboard}</span>
               </ModernButton>
             </Link>
             
@@ -37,7 +40,7 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <Map className="h-4 w-4" />
-                <span>Map</span>
+                <span>{t.nav.map}</span>
               </ModernButton>
             </Link>
             
@@ -47,13 +50,15 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <Plus className="h-4 w-4" />
-                <span>New Project</span>
+                <span>{t.nav.newProject}</span>
               </ModernButton>
             </Link>
           </nav>
         </div>
 
         <div className="flex items-center space-x-4">
+          <LanguageSwitcher />
+          
           {user ? (
             <div className="flex items-center space-x-3">
               <div className="flex items-center space-x-2 text-sm text-slate-600">
@@ -67,13 +72,13 @@ export default function NavigationHeader() {
                 className="flex items-center space-x-2"
               >
                 <LogOut className="h-4 w-4" />
-                <span>Sign Out</span>
+                <span>{t.nav.signOut}</span>
               </ModernButton>
             </div>
           ) : (
             <Link href="/auth">
               <ModernButton variant="default">
-                Sign In
+                {t.nav.signIn}
               </ModernButton>
             </Link>
           )}

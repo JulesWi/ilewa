@@ -3,8 +3,11 @@
 import { ModernButton } from "@/components/ui/modern-button"
 import { ArrowRight, Globe, MapPin, Users, TrendingUp } from "lucide-react"
 import Link from "next/link"
+import { useTranslation } from "@/hooks/useTranslation"
 
 export default function HeroSection() {
+  const { t } = useTranslation()
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -14,18 +17,16 @@ export default function HeroSection() {
           {/* Logo/Title */}
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-700 to-slate-900">
-              ILEWA
+              {t.landing.title}
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 font-medium">
-              Interactive Mapping of Innovative Projects
+              {t.landing.subtitle}
             </p>
           </div>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Discover, share, and track innovative projects around the world. 
-            A collaborative platform to visualize the impact of initiatives in 
-            education, environment, health, and economy.
+            {t.landing.description}
           </p>
 
           {/* CTA Buttons */}
@@ -33,14 +34,14 @@ export default function HeroSection() {
             <Link href="/map">
               <ModernButton size="lg" variant="premium" className="px-8 py-6 text-lg">
                 <Globe className="mr-2 h-5 w-5" />
-                Explore the Map
+                {t.landing.exploreMap}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </ModernButton>
             </Link>
             <Link href="/auth">
               <ModernButton size="lg" variant="secondary" className="px-8 py-6 text-lg">
                 <Users className="mr-2 h-5 w-5" />
-                Sign In
+                {t.nav.signIn}
               </ModernButton>
             </Link>
           </div>
@@ -49,22 +50,22 @@ export default function HeroSection() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pt-16">
             <div className="space-y-2 p-6 bg-white rounded-lg shadow-sm border border-slate-200">
               <div className="text-4xl font-bold text-slate-800">24</div>
-              <div className="text-slate-600 text-sm">Active Projects</div>
+              <div className="text-slate-600 text-sm">{t.landing.activeProjects}</div>
             </div>
             <div className="space-y-2 p-6 bg-white rounded-lg shadow-sm border border-slate-200">
               <div className="text-4xl font-bold text-slate-800">12</div>
-              <div className="text-slate-600 text-sm">Countries Represented</div>
+              <div className="text-slate-600 text-sm">{t.landing.countriesRepresented}</div>
             </div>
             <div className="space-y-2 p-6 bg-white rounded-lg shadow-sm border border-slate-200">
               <div className="text-4xl font-bold text-slate-800">156</div>
-              <div className="text-slate-600 text-sm">Contributors</div>
+              <div className="text-slate-600 text-sm">{t.landing.contributors}</div>
             </div>
             <div className="space-y-2 p-6 bg-white rounded-lg shadow-sm border border-slate-200">
               <div className="flex items-center gap-2">
                 <TrendingUp className="h-8 w-8 text-green-600" />
                 <div className="text-4xl font-bold text-slate-800">+18%</div>
               </div>
-              <div className="text-slate-600 text-sm">Monthly Growth</div>
+              <div className="text-slate-600 text-sm">{t.landing.monthlyGrowth}</div>
             </div>
           </div>
         </div>
