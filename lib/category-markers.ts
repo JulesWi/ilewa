@@ -132,10 +132,12 @@ export function createCustomMarkerHTML(category: string, size: 'small' | 'medium
       <!-- Symbole/Émoji -->
       <div style="
         position: absolute;
-        top: 4px;
+        top: 3px;
         font-size: ${s.symbolSize}px;
         z-index: 1;
         user-select: none;
+        line-height: 1;
+        text-align: center;
       ">
         ${marker.symbol}
       </div>
